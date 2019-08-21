@@ -69,6 +69,9 @@
 #ifdef COIN_HAS_MUMPS
 # include "IpMumpsSolverInterface.hpp"
 #endif
+#ifdef HAVE_PETSC
+#include "IpPetscSolverInterface.hpp"
+#endif
 
 #ifdef HAVE_LINEARSOLVERLOADER
 # include "HSLLoader.h"
@@ -92,7 +95,7 @@ void AlgorithmBuilder::RegisterOptions(
 )
 {
    roptions->SetRegisteringCategory("Linear Solver");
-   roptions->AddStringOption9(
+   roptions->AddStringOption10(
       "linear_solver",
       "Linear solver used for step computations.",
 #ifdef COINHSL_HAS_MA27
@@ -134,6 +137,7 @@ void AlgorithmBuilder::RegisterOptions(
       "ma86", "use the Harwell routine HSL_MA86",
       "ma97", "use the Harwell routine HSL_MA97",
       "pardiso", "use the Pardiso package",
+      "petsc", "use the PETSc package",
       "wsmp", "use WSMP package",
       "mumps", "use MUMPS package",
       "custom", "use custom linear solver",
@@ -379,7 +383,14 @@ SmartPtr<SymLinearSolver> AlgorithmBuilder::SymLinearSolverFactory(
 #else
       SolverInterface = new PardisoSolverInterface();
 #endif
-
+   }
+   else if( linear_solver == "petsc" )
+   {
+# ifdef HAVE_PETSC
+      SolverInterface = new PetscSolverInterface();
+# else
+      THROW_EXCEPTION(OPTION_INVALID, "Support for PETSc has not been compiled into Ipopt.");
+# endif
    }
    else if( linear_solver == "ma97" )
    {

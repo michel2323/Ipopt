@@ -58,6 +58,11 @@ if COIN_HAS_MUMPS
 liblinsolvers_la_SOURCES += IpMumpsSolverInterface.cpp IpMumpsSolverInterface.hpp
 endif
 
+if HAVE_PETSC
+liblinsolvers_la_SOURCES += IpPetscSolverInterface.cpp IpPetscSolverInterface.hpp
+endif
+
+
 liblinsolvers_la_LDFLAGS = $(LT_LDFLAGS)
 
 AM_CPPFLAGS = -I`$(CYGPATH_W) $(srcdir)/../../Common` \
@@ -66,7 +71,8 @@ AM_CPPFLAGS = -I`$(CYGPATH_W) $(srcdir)/../../Common` \
 	-I`$(CYGPATH_W) $(srcdir)/..` \
 	-I`$(CYGPATH_W) $(srcdir)/../../Interfaces` \
 	-I`$(CYGPATH_W) $(srcdir)/../../contrib/CGPenalty` \
-	$(MUMPS_CFLAGS) $(HSL_CFLAGS)
+	$(MUMPS_CFLAGS) $(HSL_CFLAGS) \
+	$(PETSC_CPPFLAGS)
 
 # This line is necessary to allow VPATH compilation
 DEFAULT_INCLUDES = -I. -I`$(CYGPATH_W) $(srcdir)` -I$(top_builddir)/src/Common

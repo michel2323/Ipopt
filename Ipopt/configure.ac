@@ -291,6 +291,26 @@ fi
 
 AM_CONDITIONAL(HAVE_MA28, test $have_ma28 = yes)
 
+
+###########
+# PETSC   #
+###########
+
+AC_ARG_WITH([petsc],
+            AC_HELP_STRING([--with-petsc],
+                           [specify PETSc path]),
+            [use_petsc=$withval], [use_petsc=no])
+
+if test "$use_petsc" != "no"; then
+  AC_DEFINE(HAVE_PETSC,1,[Define to 1 if PETSc is available])
+  PETSC_CPPFLAGS="-I${PETSC_BASE_DIR}/${PETSC_ARCH}/include -I${PETSC_BASE_DIR}/include"
+  AC_SUBST(PETSC_CPPFLAGS)
+  LIBS="$LIBS -L${PETSC_BASE_DIR}/${PETSC_ARCH}/lib -lpetsc"
+  IPOPTLIB_LIBS="$IPOPTLIB_LIBS -L${PETSC_BASE_DIR}/${PETSC_ARCH}/lib -lpetsc"
+  IPOPTLIB_PCLIBS="$IPOPTLIB_PCLIBS -L${PETSC_BASE_DIR}/${PETSC_ARCH}/lib -lpetsc "
+  IPOPTLIB_LIBS_INSTALLED="$IPOPTLIB_LIBS_INSTALLED -L${PETSC_BASE_DIR}/${PETSC_ARCH}/lib -lpetsc "
+fi
+
 ###########
 # PARDISO #
 ###########
@@ -718,6 +738,7 @@ AC_SUBST(ASTYLEFLAGS)
 AC_SUBST(IPALLLIBS)
 IPALLLIBS="../contrib/CGPenalty/libcgpenalty.la ../Algorithm/libipoptalg.la ../Algorithm/LinearSolvers/liblinsolvers.la ../Common/libcommon.la ../LinAlg/liblinalg.la ../LinAlg/TMatrices/libtmatrices.la"
 
+AM_CONDITIONAL([HAVE_PETSC],[test ! "$use_petsc" = no])
 AM_CONDITIONAL([HAVE_PARDISO],[test ! "$use_pardiso" = no])
 AM_CONDITIONAL([HAVE_WSMP],[test ! "$use_wsmp" = no])
 

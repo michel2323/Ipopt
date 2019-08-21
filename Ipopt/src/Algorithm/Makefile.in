@@ -47,7 +47,8 @@ host_triplet = @host@
 #if COIN_HAS_MUMPS
 #  AM_CPPFLAGS += $(MUMPS_CFLAGS)
 #endif
-@COIN_HAS_HSL_TRUE@am__append_1 = $(HSL_CFLAGS)
+@HAVE_PETSC_TRUE@am__append_1 = $(PETSC_CPPFLAGS)
+@COIN_HAS_HSL_TRUE@am__append_2 = $(HSL_CFLAGS)
 subdir = src/Algorithm
 DIST_COMMON = $(includeipopt_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
@@ -231,6 +232,8 @@ HAVE_MA28_FALSE = @HAVE_MA28_FALSE@
 HAVE_MA28_TRUE = @HAVE_MA28_TRUE@
 HAVE_PARDISO_FALSE = @HAVE_PARDISO_FALSE@
 HAVE_PARDISO_TRUE = @HAVE_PARDISO_TRUE@
+HAVE_PETSC_FALSE = @HAVE_PETSC_FALSE@
+HAVE_PETSC_TRUE = @HAVE_PETSC_TRUE@
 HAVE_WSMP_FALSE = @HAVE_WSMP_FALSE@
 HAVE_WSMP_TRUE = @HAVE_WSMP_TRUE@
 HSL_CFLAGS = @HSL_CFLAGS@
@@ -311,6 +314,7 @@ PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PETSC_CPPFLAGS = @PETSC_CPPFLAGS@
 PKG_CONFIG = @PKG_CONFIG@
 RANLIB = @RANLIB@
 RPATH_FLAGS = @RPATH_FLAGS@
@@ -464,7 +468,8 @@ AM_CPPFLAGS = -I`$(CYGPATH_W) $(srcdir)/../Common` -I`$(CYGPATH_W) \
 	$(srcdir)/../Interfaces` -I`$(CYGPATH_W) \
 	$(srcdir)/LinearSolvers` -I`$(CYGPATH_W) \
 	$(srcdir)/../contrib/CGPenalty` -I`$(CYGPATH_W) \
-	$(srcdir)/../contrib/LinearSolverLoader` $(am__append_1)
+	$(srcdir)/../contrib/LinearSolverLoader` $(am__append_1) \
+	$(am__append_2)
 
 # This line is necessary to allow VPATH compilation
 DEFAULT_INCLUDES = -I. -I`$(CYGPATH_W) $(srcdir)` -I$(top_builddir)/src/Common
