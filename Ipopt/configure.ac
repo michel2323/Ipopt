@@ -312,6 +312,25 @@ if test "$use_petsc" != "no"; then
 fi
 
 ###########
+# MAGMA   #
+###########
+
+AC_ARG_WITH([magma],
+            AC_HELP_STRING([--with-magma],
+                           [specify MAGMA path]),
+            [use_magma=$withval], [use_magma=no])
+
+if test "$use_magma" != "no"; then
+  AC_DEFINE(HAVE_MAGMA,1,[Define to 1 if MAGMA is available])
+  MAGMA_CPPFLAGS="-I${MAGMA_DIR}/include"
+  AC_SUBST(MAGMA_CPPFLAGS)
+  LIBS="$LIBS -L${MAGMA_DIR}/lib -lmagma -lmagma_sparse"
+  IPOPTLIB_LIBS="$IPOPTLIB_LIBS -L${MAGMA_DIR}/lib -lmagma -lmagma_sparse" 
+  IPOPTLIB_PCLIBS="$IPOPTLIB_PCLIBS -L${MAGMA_DIR}/lib -lmagma -lmagma_sparse" 
+  IPOPTLIB_LIBS_INSTALLED="$IPOPTLIB_LIBS_INSTALLED  -L${MAGMA_DIR}/lib -lmagma -lmagma_sparse"
+fi
+
+###########
 # PARDISO #
 ###########
 
@@ -739,6 +758,7 @@ AC_SUBST(IPALLLIBS)
 IPALLLIBS="../contrib/CGPenalty/libcgpenalty.la ../Algorithm/libipoptalg.la ../Algorithm/LinearSolvers/liblinsolvers.la ../Common/libcommon.la ../LinAlg/liblinalg.la ../LinAlg/TMatrices/libtmatrices.la"
 
 AM_CONDITIONAL([HAVE_PETSC],[test ! "$use_petsc" = no])
+AM_CONDITIONAL([HAVE_MAGMA],[test ! "$use_magma" = no])
 AM_CONDITIONAL([HAVE_PARDISO],[test ! "$use_pardiso" = no])
 AM_CONDITIONAL([HAVE_WSMP],[test ! "$use_wsmp" = no])
 
