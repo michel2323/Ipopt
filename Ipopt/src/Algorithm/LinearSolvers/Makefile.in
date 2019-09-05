@@ -57,6 +57,7 @@ host_triplet = @host@
 
 @COIN_HAS_MUMPS_TRUE@am__append_5 = IpMumpsSolverInterface.cpp IpMumpsSolverInterface.hpp
 @HAVE_PETSC_TRUE@am__append_6 = IpPetscSolverInterface.cpp IpPetscSolverInterface.hpp
+@HAVE_MAGMA_TRUE@am__append_7 = IpMagmaSolverInterface.cpp IpMagmaSolverInterface.hpp
 subdir = src/Algorithm/LinearSolvers
 DIST_COMMON = $(includeipopt_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
@@ -93,7 +94,8 @@ am__liblinsolvers_la_SOURCES_DIST = IpGenKKTSolverInterface.hpp \
 	IpWsmpSolverInterface.hpp IpIterativeWsmpSolverInterface.cpp \
 	IpIterativeWsmpSolverInterface.hpp IpMumpsSolverInterface.cpp \
 	IpMumpsSolverInterface.hpp IpPetscSolverInterface.cpp \
-	IpPetscSolverInterface.hpp
+	IpPetscSolverInterface.hpp IpMagmaSolverInterface.cpp \
+	IpMagmaSolverInterface.hpp
 @BUILD_LINEARSOLVERLOADER_TRUE@am__objects_1 =  \
 @BUILD_LINEARSOLVERLOADER_TRUE@	IpPardisoSolverInterface.lo \
 @BUILD_LINEARSOLVERLOADER_TRUE@	IpMa28Partition.lo
@@ -103,6 +105,7 @@ am__liblinsolvers_la_SOURCES_DIST = IpGenKKTSolverInterface.hpp \
 @HAVE_WSMP_TRUE@	IpIterativeWsmpSolverInterface.lo
 @COIN_HAS_MUMPS_TRUE@am__objects_5 = IpMumpsSolverInterface.lo
 @HAVE_PETSC_TRUE@am__objects_6 = IpPetscSolverInterface.lo
+@HAVE_MAGMA_TRUE@am__objects_7 = IpMagmaSolverInterface.lo
 am_liblinsolvers_la_OBJECTS = IpLinearSolversRegOp.lo \
 	IpSlackBasedTSymScalingMethod.lo IpTripletToCSRConverter.lo \
 	IpTSymDependencyDetector.lo IpTSymLinearSolver.lo \
@@ -111,7 +114,7 @@ am_liblinsolvers_la_OBJECTS = IpLinearSolversRegOp.lo \
 	IpMc19TSymScalingMethod.lo IpMa28TDependencyDetector.lo \
 	IpMa77SolverInterface.lo $(am__objects_1) $(am__objects_2) \
 	$(am__objects_3) $(am__objects_4) $(am__objects_5) \
-	$(am__objects_6)
+	$(am__objects_6) $(am__objects_7)
 liblinsolvers_la_OBJECTS = $(am_liblinsolvers_la_OBJECTS)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -257,6 +260,8 @@ HAVE_EXTERNALS_FALSE = @HAVE_EXTERNALS_FALSE@
 HAVE_EXTERNALS_TRUE = @HAVE_EXTERNALS_TRUE@
 HAVE_MA28_FALSE = @HAVE_MA28_FALSE@
 HAVE_MA28_TRUE = @HAVE_MA28_TRUE@
+HAVE_MAGMA_FALSE = @HAVE_MAGMA_FALSE@
+HAVE_MAGMA_TRUE = @HAVE_MAGMA_TRUE@
 HAVE_PARDISO_FALSE = @HAVE_PARDISO_FALSE@
 HAVE_PARDISO_TRUE = @HAVE_PARDISO_TRUE@
 HAVE_PETSC_FALSE = @HAVE_PETSC_FALSE@
@@ -308,6 +313,7 @@ LIBTOOLM4 = @LIBTOOLM4@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 LT_LDFLAGS = @LT_LDFLAGS@
+MAGMA_CPPFLAGS = @MAGMA_CPPFLAGS@
 MAINT = @MAINT@
 MAINTAINER_MODE_FALSE = @MAINTAINER_MODE_FALSE@
 MAINTAINER_MODE_TRUE = @MAINTAINER_MODE_TRUE@
@@ -434,7 +440,8 @@ liblinsolvers_la_SOURCES = IpGenKKTSolverInterface.hpp \
 	IpMa28TDependencyDetector.cpp IpMa28TDependencyDetector.hpp \
 	IpMa77SolverInterface.cpp IpMa77SolverInterface.hpp \
 	$(am__append_1) $(am__append_2) $(am__append_3) \
-	$(am__append_4) $(am__append_5) $(am__append_6)
+	$(am__append_4) $(am__append_5) $(am__append_6) \
+	$(am__append_7)
 liblinsolvers_la_LDFLAGS = $(LT_LDFLAGS)
 AM_CPPFLAGS = -I`$(CYGPATH_W) $(srcdir)/../../Common` \
 	-I`$(CYGPATH_W) $(srcdir)/../../LinAlg` \
@@ -443,7 +450,7 @@ AM_CPPFLAGS = -I`$(CYGPATH_W) $(srcdir)/../../Common` \
 	-I`$(CYGPATH_W) $(srcdir)/../../Interfaces` \
 	-I`$(CYGPATH_W) $(srcdir)/../../contrib/CGPenalty` \
 	$(MUMPS_CFLAGS) $(HSL_CFLAGS) \
-	$(PETSC_CPPFLAGS)
+	$(PETSC_CPPFLAGS) $(MAGMA_CPPFLAGS)
 
 
 # This line is necessary to allow VPATH compilation
@@ -540,6 +547,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/IpMa77SolverInterface.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/IpMa86SolverInterface.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/IpMa97SolverInterface.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/IpMagmaSolverInterface.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/IpMc19TSymScalingMethod.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/IpMumpsSolverInterface.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/IpPardisoSolverInterface.Plo@am__quote@

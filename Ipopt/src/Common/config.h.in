@@ -102,6 +102,9 @@
    loading of shared libraries with linear solvers */
 #undef HAVE_LINEARSOLVERLOADER
 
+/* Define to 1 if MAGMA is available */
+#undef HAVE_MAGMA
+
 /* Define to 1 if you have the <math.h> header file. */
 #undef HAVE_MATH_H
 

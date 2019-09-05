@@ -48,7 +48,8 @@ host_triplet = @host@
 #  AM_CPPFLAGS += $(MUMPS_CFLAGS)
 #endif
 @HAVE_PETSC_TRUE@am__append_1 = $(PETSC_CPPFLAGS)
-@COIN_HAS_HSL_TRUE@am__append_2 = $(HSL_CFLAGS)
+@HAVE_MAGMA_TRUE@am__append_2 = $(MAGMA_CPPFLAGS)
+@COIN_HAS_HSL_TRUE@am__append_3 = $(HSL_CFLAGS)
 subdir = src/Algorithm
 DIST_COMMON = $(includeipopt_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
@@ -230,6 +231,8 @@ HAVE_EXTERNALS_FALSE = @HAVE_EXTERNALS_FALSE@
 HAVE_EXTERNALS_TRUE = @HAVE_EXTERNALS_TRUE@
 HAVE_MA28_FALSE = @HAVE_MA28_FALSE@
 HAVE_MA28_TRUE = @HAVE_MA28_TRUE@
+HAVE_MAGMA_FALSE = @HAVE_MAGMA_FALSE@
+HAVE_MAGMA_TRUE = @HAVE_MAGMA_TRUE@
 HAVE_PARDISO_FALSE = @HAVE_PARDISO_FALSE@
 HAVE_PARDISO_TRUE = @HAVE_PARDISO_TRUE@
 HAVE_PETSC_FALSE = @HAVE_PETSC_FALSE@
@@ -281,6 +284,7 @@ LIBTOOLM4 = @LIBTOOLM4@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 LT_LDFLAGS = @LT_LDFLAGS@
+MAGMA_CPPFLAGS = @MAGMA_CPPFLAGS@
 MAINT = @MAINT@
 MAINTAINER_MODE_FALSE = @MAINTAINER_MODE_FALSE@
 MAINTAINER_MODE_TRUE = @MAINTAINER_MODE_TRUE@
@@ -469,7 +473,7 @@ AM_CPPFLAGS = -I`$(CYGPATH_W) $(srcdir)/../Common` -I`$(CYGPATH_W) \
 	$(srcdir)/LinearSolvers` -I`$(CYGPATH_W) \
 	$(srcdir)/../contrib/CGPenalty` -I`$(CYGPATH_W) \
 	$(srcdir)/../contrib/LinearSolverLoader` $(am__append_1) \
-	$(am__append_2)
+	$(am__append_2) $(am__append_3)
 
 # This line is necessary to allow VPATH compilation
 DEFAULT_INCLUDES = -I. -I`$(CYGPATH_W) $(srcdir)` -I$(top_builddir)/src/Common
