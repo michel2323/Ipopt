@@ -13,6 +13,7 @@ typedef struct {
   Vec x, b;             /* solution vector, right-hand-side vector */
   Mat A;                /* sparse matrix */
   KSP ksp;              /* linear solver context */
+  PC pc;
 } UserCtx;
 
 /** Interface to the linear solver Petsc, derived from
@@ -27,6 +28,7 @@ public:
    UserCtx ctx;
    double* values = NULL;
    int dim;        /* grid dimensions */
+   int usedirect = 0;
    PetscSolverInterface();
 
 //    /** Destructor */
